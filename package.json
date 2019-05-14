@@ -1,9 +1,10 @@
 {
   "name": "t2-backend-api-anupant01",
   "version": "1.0.1",
-  "description": "Name: Anu Pant",
+  "description": "",
   "main": "index.js",
   "scripts": {
+    "live": "PORT=8000 NODE_ENV=dev nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/stw304cem/t2-backend-api-anupant01/issues"
   },
-  "homepage": "https://github.com/stw304cem/t2-backend-api-anupant01#readme"
+  "homepage": "https://github.com/stw304cem/t2-backend-api-anupant01#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
