@@ -1,8 +1,8 @@
 var express = require('express');
 
-
 var app = new express();
 
+var bodyParser = require('body-parser');
 
 app.use(function (req,res,next) {
 
@@ -12,10 +12,13 @@ app.use(function (req,res,next) {
 	
 })
 
+//this will parse jason data in form body that arrives from client browser
+app.use(bodyParser.json());
+
 
 app.post('/v1/users',
 	function(req,res,next){
-		
+
 		
 })
 
