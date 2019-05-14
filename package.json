@@ -1,0 +1,23 @@
+{
+  "name": "craftinfobackend",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "live": " nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anupant01/backend_webApi.git"
+  },
+  "author": "Anu Panta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anupant01/backend_webApi/issues"
+  },
+  "homepage": "https://github.com/anupant01/backend_webApi#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
