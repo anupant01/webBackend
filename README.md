@@ -1,9 +1,9 @@
-# Your Project Title Here
-Name: Your Full Name
+# Craft Information
+Name: Anu Pant
 
-CollegeID: Your College ID
+CollegeID: 170007
 
-Batch: Jan19A/B/C/D?
+Batch: Jan19C
 
 Brief description of the domain of your project!
 
