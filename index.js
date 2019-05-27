@@ -4,6 +4,11 @@ var app = new express();
 
 var bodyParser = require('body-parser');
 
+
+var test = require('./models/usersModel');
+
+
+
 app.use(function (req,res,next) {
 
 	res.setHeader('Access-Control-Allow-Origin','*');
