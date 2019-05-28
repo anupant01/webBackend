@@ -1,3 +1,4 @@
+
 var express = require('express');
 
 var app = new express();
@@ -5,7 +6,7 @@ var app = new express();
 var bodyParser = require('body-parser');
 
 
-var test = require('./controllers/usersController');
+var userController = require('./controllers/usersController');
 
 
 //this is the first middleware - application middleware , all routes hit this middleware first
@@ -22,10 +23,23 @@ app.use(function (req,res,next) {
 app.use(bodyParser.json());
 
 
-app.post('/v1/users',
-	function(req,res,next){
-
+app.post('/v1/users',userController.registerUser,
+		function(req,res,next){
+			res.status(201);
+			res.send({"message": "User was registered"});
 		
+})
+
+
+
+
+
+
+
+//error catching
+app.use(function(err,req,res,next){
+
+	console.log(err);
 })
 
 

@@ -8,7 +8,7 @@ const User = dbconfig.sequelize.define('user', {
  id: {
     type: dbconfig.Sequelize.INTEGER,
     allowNull: false,
-    autoIncrenment:true,
+    autoIncrement:true,
     primaryKey:true
   },
   firstName: {
@@ -29,11 +29,6 @@ const User = dbconfig.sequelize.define('user', {
     allowNull: false
     // allowNull defaults to true
   },
-    contactno: {
-    type: dbconfig.Sequelize.STRING,
-    allowNull: false
-    // allowNull defaults to true
-  },
   username: {
     type: dbconfig.Sequelize.STRING,
     allowNull: false
@@ -50,7 +45,7 @@ const User = dbconfig.sequelize.define('user', {
   // options
 
   freezeTableName:true,
-  tableName:'user_table'
+  tableName:'usertbl'
 });
 
 

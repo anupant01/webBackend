@@ -2,15 +2,17 @@ var userModel = require('../models/usersModel');
 
 // console.log(userModel);
 //insert
+function registerUser(req,res,next){
 userModel.User.create({
-	firstName:'asha',
-	lastName:'karki', 
-	email:'a@gmail.com ',
-	address:'Bharatpur',
-	contactno:'123456',
-	username:'asha',
-	password:'asha' 
+	firstName: req.body.firstName,
+	lastName: req.body.lastName,
+	email: req.body.email,
+	address: req.body.address,
+	username:req.body.username,
+	password: req.body.password
+
 })
+
 .then(function(result){
 
 console.log(result);
@@ -19,9 +21,19 @@ console.log(result);
 })
 .catch(function(err){
 
-console.log(err); 
+
+next({"status":500, "message":"DB Error"}) 
+next('this is error');
 
 })
+
+}
+
+module.exports={
+	registerUser
+	
+}
+// registerUser();
 
 
 
