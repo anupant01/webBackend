@@ -55,7 +55,7 @@ const User = dbconfig.sequelize.define('user', {
 
 
 //error handling then and catch
-User.sync({force:true})
+User.sync({force:false})
 .then(function(result){
 
 	console.log(result)
@@ -66,3 +66,9 @@ User.sync({force:true})
 	console.log(err)
 
 })
+
+
+module.exports={
+User
+
+}

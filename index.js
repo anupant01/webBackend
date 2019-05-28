@@ -5,13 +5,14 @@ var app = new express();
 var bodyParser = require('body-parser');
 
 
-var test = require('./models/usersModel');
+var test = require('./controllers/usersController');
 
 
-
+//this is the first middleware - application middleware , all routes hit this middleware first
 app.use(function (req,res,next) {
 
 	res.setHeader('Access-Control-Allow-Origin','*');
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 	res.setHeader('Access-Control-Allow-Headers','content-type')
 	next();
 	
