@@ -23,10 +23,10 @@ app.use(function (req,res,next) {
 app.use(bodyParser.json());
 
 
-app.post('/v1/users',userController.registerUser,
+app.post('/v1/users',userController.hashGenerator,userController.registerUser,
 		function(req,res,next){
 			res.status(201);
-			res.send({"message": "User was registered"});
+			res.send({"message": "User registered successfully"});
 		
 })
 
@@ -39,7 +39,8 @@ app.post('/v1/users',userController.registerUser,
 //error catching
 app.use(function(err,req,res,next){
 
-	console.log(err);
+	res.status(err.status);
+	res.send({"message":err.message});
 })
 
 

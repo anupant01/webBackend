@@ -1,6 +1,33 @@
 var userModel = require('../models/usersModel');
 
-// console.log(userModel);
+var bcryptjs = require('bcryptjs');
+
+var saltRounds = 10; 
+
+
+//hashgenator
+function hashGenerator(req,res,next){
+
+	//plain text password from frontend
+req.body.password 
+bcryptjs.hash(req.body.password , saltRounds) 
+.then(function(hash){
+
+	console.log(hash);
+	req.hashValue = hash;
+	next();
+
+})
+.catch(function(err){
+
+})
+ 
+
+
+}
+
+
+
 //insert
 function registerUser(req,res,next){
 userModel.User.create({
@@ -9,28 +36,28 @@ userModel.User.create({
 	email: req.body.email,
 	address: req.body.address,
 	username:req.body.username,
-	password: req.body.password
+	password: req.hashValue
 
 })
 
 .then(function(result){
 
-console.log(result);
-
+// console.log(result);
+next();
 
 })
 .catch(function(err){
 
 
 next({"status":500, "message":"DB Error"}) 
-next('this is error');
+
 
 })
 
 }
 
 module.exports={
-	registerUser
+	registerUser,hashGenerator
 	
 }
 // registerUser();

@@ -53,7 +53,7 @@ const User = dbconfig.sequelize.define('user', {
 User.sync({force:false})
 .then(function(result){
 
-	console.log(result)
+	// console.log(result)
 
 })
 .catch(function(err){
