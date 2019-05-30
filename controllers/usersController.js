@@ -5,6 +5,36 @@ var bcryptjs = require('bcryptjs');
 var saltRounds = 10; 
 
 
+// validator
+function validator(req,res,nex){
+
+userModel.User.findOne({
+
+	where:{username:req.body.username}
+}) 
+.then(function (result){
+
+next({"status":409,"message":"user already exists"} )
+
+})
+
+.catch(function(err){
+
+ 	
+})
+}
+
+
+
+
+
+
+
+
+
+
+
+
 //hashgenator
 function hashGenerator(req,res,next){
 
@@ -25,7 +55,7 @@ bcryptjs.hash(req.body.password , saltRounds)
 
 
 }
-
+  
 
 
 //insert

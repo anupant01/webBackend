@@ -23,7 +23,7 @@ app.use(function (req,res,next) {
 app.use(bodyParser.json());
 
 
-app.post('/v1/users',userController.hashGenerator,userController.registerUser,
+app.post('/v1/users',userController.validator ,userController.hashGenerator,userController.registerUser,
 		function(req,res,next){
 			res.status(201);
 			res.send({"message": "User registered successfully"});
