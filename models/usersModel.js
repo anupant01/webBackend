@@ -65,5 +65,4 @@ User.sync({force:false})
 
 module.exports={
 User
-
 }

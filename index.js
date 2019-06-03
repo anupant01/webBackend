@@ -1,4 +1,3 @@
-
 var express = require('express');
 
 var app = new express();
@@ -23,13 +22,20 @@ app.use(function (req,res,next) {
 app.use(bodyParser.json());
 
 
-app.post('/v1/users',userController.validator ,userController.hashGenerator,userController.registerUser,
+app.post('/v1/users',userController.validator,userController.hashGenerator,userController.registerUser,
 		function(req,res,next){
 			res.status(201);
 			res.send({"message": "User registered successfully"});
+
 		
 })
 
+// app.post('/check',(req,res)=>{
+// 	console.log(req.body)
+// })
+app.get('/check',(req,res)=>{
+	res.end('Hello World!')
+})
 
 
 
@@ -44,5 +50,4 @@ app.use(function(err,req,res,next){
 })
 
 
-app.listen(process.env.PORT);
-console.log("server is running");
+app.listen(3000,()=>console.log("server is running"));

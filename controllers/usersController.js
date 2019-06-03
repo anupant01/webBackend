@@ -1,37 +1,28 @@
-var userModel = require('../models/usersModel');
+var {User} = require('../models/usersModel');
 
 var bcryptjs = require('bcryptjs');
 
 var saltRounds = 10; 
 
-
 // validator
-function validator(req,res,nex){
+function validator(req,res,next){
+	console.log(req.body.username)
+	User.findOne({
+		where : {username:req.body.username}
+	})
+		.then(function(result){
+			console.log(result.dataValues);
+			if (result.dataValues != ''){
+				next({"status":409,"message":'user already exists'})
+			}
+				// console.log('user exists')
+				// res.sendStatus(409)
 
-userModel.User.findOne({
-
-	where:{username:req.body.username}
-}) 
-.then(function (result){
-
-next({"status":409,"message":"user already exists"} )
-
-})
-
-.catch(function(err){
-
- 	
-})
+		})
+		.catch(function(err){
+			next();
+		})
 }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -49,7 +40,7 @@ bcryptjs.hash(req.body.password , saltRounds)
 
 })
 .catch(function(err){
-
+next()
 })
  
 
@@ -58,9 +49,9 @@ bcryptjs.hash(req.body.password , saltRounds)
   
 
 
-//insert
+//user register
 function registerUser(req,res,next){
-userModel.User.create({
+User.create({
 	firstName: req.body.firstName,
 	lastName: req.body.lastName,
 	email: req.body.email,
@@ -72,7 +63,7 @@ userModel.User.create({
 
 .then(function(result){
 
-// console.log(result);
+console.log(result);
 next();
 
 })
@@ -87,10 +78,10 @@ next({"status":500, "message":"DB Error"})
 }
 
 module.exports={
-	registerUser,hashGenerator
+	registerUser,hashGenerator,validator
 	
 }
-// registerUser();
+
 
 
 

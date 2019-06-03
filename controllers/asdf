@@ -1,0 +1,28 @@
+// validator
+function validator(req,res,nex){
+
+userModel.User.findOne({
+
+	where:{username:req.body.username}
+}) 
+.then(function (result){
+	if(result.dataValues != '' && null){
+		next({"status":409,"message":"user already exists"} )
+	}
+})
+
+.catch(function(err){
+ 	next();
+})
+}
+
+
+
+
+
+,validator
+
+
+
+
+,userController.validator
