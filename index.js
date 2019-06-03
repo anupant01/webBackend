@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 
 var userController = require('./controllers/usersController');
 
+const loginController= require('./controllers/loginController');
+
 
 //this is the first middleware - application middleware , all routes hit this middleware first
 app.use(function (req,res,next) {
@@ -25,14 +27,22 @@ app.use(bodyParser.json());
 app.post('/v1/users',userController.validator,userController.hashGenerator,userController.registerUser,
 		function(req,res,next){
 			res.status(201);
-			res.send({"message": "User registered successfully"});
+			res.send({"message": "User registered successfully!!"});
 
 		
 })
 
-// app.post('/check',(req,res)=>{
-// 	console.log(req.body)
-// })
+
+app.post('/v1/sign',loginController.validate,loginController.confirm,
+		function(req,res,next){
+			res.status(200);
+			res.send({'message':'succesfully login'});
+			next();
+
+		
+})
+
+
 app.get('/check',(req,res)=>{
 	res.end('Hello World!')
 })

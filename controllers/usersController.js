@@ -63,8 +63,7 @@ User.create({
 
 .then(function(result){
 
-console.log(result);
-next();
+// console.log(result);
 
 })
 .catch(function(err){
