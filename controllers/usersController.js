@@ -15,8 +15,7 @@ function validator(req,res,next){
 			if (result.dataValues != ''){
 				next({"status":409,"message":'user already exists'})
 			}
-				// console.log('user exists')
-				// res.sendStatus(409)
+		
 
 		})
 		.catch(function(err){
@@ -62,10 +61,11 @@ User.create({
 })
 
 .then(function(result){
+	// next({"message":'User registered'})
 
-// console.log(result);
 
 })
+
 .catch(function(err){
 
 
@@ -73,6 +73,7 @@ next({"status":500, "message":"DB Error"})
 
 
 })
+next()
 
 }
 

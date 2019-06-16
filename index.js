@@ -26,8 +26,9 @@ app.use(bodyParser.json());
 
 app.post('/v1/users',userController.validator,userController.hashGenerator,userController.registerUser,
 		function(req,res,next){
+			console.log('asdsad')
 			res.status(201);
-			res.send({"message": "User registered successfully!!"});
+			res.send({"message": "User registered"});
 
 		
 })
