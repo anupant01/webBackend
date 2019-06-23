@@ -1,7 +1,8 @@
 var dbconfig = require('../configs/dbConfigs');
 
+// console.log(dbconfig.sequelize);
 
-const usermodel = dbconfig.sequelize.define('user', {
+const Craft = dbconfig.sequelize.define('craft', {
   // attributes
 
  id: {
@@ -10,43 +11,38 @@ const usermodel = dbconfig.sequelize.define('user', {
     autoIncrement:true,
     primaryKey:true
   },
-  firstName: {
+  craftName: {
     type: dbconfig.Sequelize.STRING,
     allowNull: false
   },
-  lastName: {
+  description: {
     type: dbconfig.Sequelize.STRING,
      allowNull: false
   },
-    email: {
+    origination:{
     type: dbconfig.Sequelize.STRING,
     allowNull: false
     // allowNull defaults to true
   },
-   address: {
+  type: {
     type: dbconfig.Sequelize.STRING,
     allowNull: false
     // allowNull defaults to true
   },
-  username: {
+  products: {
     type: dbconfig.Sequelize.STRING,
-    allowNull: false
-  },
+      allowNull: false
+        // allowNull defaults to true
+      },
 
-  password: {
+   price: {
     type: dbconfig.Sequelize.STRING,
     allowNull: false
-  },
-    images: {
-    type: dbconfig.Sequelize.STRING,
-    allowNull: false
-    //allowNull defaults to true
-  },
-
-  usertype: {
-    type: dbconfig.Sequelize.STRING,
-    allowNull: false
+    // allowNull defaults to true
   }
+  
+
+
 
   },
  
@@ -54,15 +50,15 @@ const usermodel = dbconfig.sequelize.define('user', {
   // options
 
   freezeTableName:true,
-  tableName:'usertbl'
+  tableName:'crafttbl'
 });
 
 
 //error handling then and catch
-usermodel.sync({force:false})
+Craft.sync({force:true})
 .then(function(result){
 
-	 console.log(result);
+	console.log(result)
 
 })
 .catch(function(err){
@@ -73,15 +69,5 @@ usermodel.sync({force:false})
 
 
 module.exports={
-  usermodel
+Craft
 }
-
-
-
-
-  // images: {
-  //   type: dbconfig.Sequelize.STRING,
-  //   allowNull: false
-    // allowNull defaults to true
-
-//}
