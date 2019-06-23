@@ -1,21 +1,16 @@
-var {User} = require('../models/usersModel');
-
+var user = require('../models/usersModel');
 var bcryptjs = require('bcryptjs');
-
 var saltRounds = 10; 
 
-
-
-    
     function validate(req, res, next) {
 
-    User.findOne({
+    user.usermodel.findOne({
 
         where: {
             username: req.body.username
         }
     })
-    // use had already registered
+    // user have been already registered
         .then(function(result) {
 
             // store the user's hash password obtained from database in a variable and pass it through req object
@@ -36,10 +31,6 @@ var saltRounds = 10;
 
 }
 
-
-
-
-
 function confirm(req, res, next) {
 
     // bcrypt.compare( req.body.password,req.userHashPassword)
@@ -59,5 +50,6 @@ function confirm(req, res, next) {
 module.exports =
 {
 
-    validate,confirm
+    validate,
+    confirm
 }

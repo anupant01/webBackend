@@ -1,37 +1,118 @@
 var express = require('express');
-
 var app = new express();
+const bodyParser = require('body-parser');
+var multer = require('multer');
 
-var bodyParser = require('body-parser');
+var path = require('path');
 
+var fs = require('fs');
 
 var userController = require('./controllers/usersController');
-
 const loginController= require('./controllers/loginController');
+// const craftController = require('./controllers/craftController');
 
+//this will parse jason data in form body that arrives from client browser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 
+//------------------------------------------------
 //this is the first middleware - application middleware , all routes hit this middleware first
 app.use(function (req,res,next) {
 
 	res.setHeader('Access-Control-Allow-Origin','*');
 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-	res.setHeader('Access-Control-Allow-Headers','content-type')
+	res.setHeader('Access-Control-Allow-Headers','content-type');
+	res.setHeader('Access-Control-Allow-Headers','X-Requested-With, content-type');
 	next();
 	
 })
 
-//this will parse jason data in form body that arrives from client browser
-app.use(bodyParser.json());
+
+//-------------------multer-------------------------------------------------
+
+var assetStorage = multer.diskStorage({
+	destination: './images/upload',
+	filename: (req, file, callback) => {
+		let ext = path.extname(file.originalname);
+		callback(null, file.fieldname + '-' + Date.now() + ext);
+	}
+  });
+  
+  var imageFileFilter = (req, file, cb) => {
+	if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+		return cb(new Error('You can upload only image files!'), false);
+	}
+	cb(null, true);
+  }
+  
+  
+  var upload = multer({
+	  storage: assetStorage,
+	  fileFilter: imageFileFilter,
+	  limits: { fileSize: 10000000 }
+  })
+  
+  var imageUpload = upload.single('images');
+  
+  
+//   app.post('/imgUpload',imageUpload,(req,res)=>{
+// 	console.log('image uploaded')
+// 	res.statusCode = 200;
+// 	res.setHeader('Content-Type', 'application/json');
+// 	res.json(req.file);
+//   })
+
+// app.post('/v1/register',upload.single("images"), userController.validator,userController.hashGenerator,userController.registerUser, (req, res) => {
+// 	    // res.statusCode = 201;
+// 	// res.setHeader('Content-Type', 'application/json');
+	
+// 	// res.json(req.file);
+// 	// res.status(200);
+// 	console.log(req.body);
+// });
 
 
-app.post('/v1/users',userController.validator,userController.hashGenerator,userController.registerUser,
+
+
+// app.use(( err, req, res, next ) => {
+// 	res.status(err.status);
+// 	res.send({"message":err.message});
+  
+//   if (err.status >= 100 && err.status < 600)
+//     res.status(err.status);
+//   else
+//     res.status(500);
+//   res.render('error');
+// });
+
+
+//------------user-------------------
+app.post('/v1/register',imageUpload, userController.validator,userController.hashGenerator,userController.registerUser,
 		function(req,res,next){
-			console.log('asdsad')
+			next();
+			res.setHeader('Content-Type', 'application/json');
+			res.json(req.file);
+			console.log(req.body)
 			res.status(201);
-			res.send({"message": "User registered"});
+			res.send({"message": "User registered successfully"});		
+});
+
+
+
+// app.post('/v1/register',
+// imageUpload,
+// function(req,res,next){
+// 	var file = req.files;
+//   console.log(req.bodyParser);
+
+// res.end();
+// 			// res.status(201);
+// 			// res.send({"message": "User registered successfully"});
 
 		
-})
+// });
+
+//,upload.single('image')  userController.validator,userController.hashGenerator,
 
 
 app.post('/v1/sign',loginController.validate,loginController.confirm,
@@ -41,14 +122,23 @@ app.post('/v1/sign',loginController.validate,loginController.confirm,
 			next();
 
 		
-})
+});
 
 
-app.get('/check',(req,res)=>{
-	res.end('Hello World!')
-})
+// app.get("/uploads",function(req,res,next){
+// 	res.send(publicDir)
+// })
 
+//-----------------------craft----------------------------------
 
+// app.post('/v1/addcraft',craftController.CraftAdd,
+// 		function(req,res,next){
+// 			res.status(200);
+// 			res.send({'message':'succesfully added'});
+// 			next();
+
+		
+// });
 
 
 
@@ -58,7 +148,25 @@ app.use(function(err,req,res,next){
 
 	res.status(err.status);
 	res.send({"message":err.message});
+
+
+	console.log(err.status);
+	console.log(err.message);
 })
 
 
-app.listen(3000,()=>console.log("server is running"));
+
+
+// ---------------------------------------------------------------
+const port = process.env.PORT;
+app.listen(port, () => {
+	try {
+		console.log(`server ${port} is running`);
+	} catch (error) {
+		console.log(`server ${port} is not running`)
+	}
+});
+
+
+
+

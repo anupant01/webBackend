@@ -20,6 +20,7 @@ sequelize.authenticate()
 
 
 // module exports
+//throw in index.js
 module.exports=
 {
 	Sequelize,
