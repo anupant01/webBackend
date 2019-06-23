@@ -34,7 +34,7 @@ var assetStorage = multer.diskStorage({
 	destination: './images/upload',
 	filename: (req, file, callback) => {
 		let ext = path.extname(file.originalname);
-		callback(null, file.fieldname + '-' + Date.now() + ext);
+		callback(null, file.originalname + '-' + Date.now() + ext);
 	}
   });
   
@@ -55,35 +55,6 @@ var assetStorage = multer.diskStorage({
   var imageUpload = upload.single('images');
   
   
-//   app.post('/imgUpload',imageUpload,(req,res)=>{
-// 	console.log('image uploaded')
-// 	res.statusCode = 200;
-// 	res.setHeader('Content-Type', 'application/json');
-// 	res.json(req.file);
-//   })
-
-// app.post('/v1/register',upload.single("images"), userController.validator,userController.hashGenerator,userController.registerUser, (req, res) => {
-// 	    // res.statusCode = 201;
-// 	// res.setHeader('Content-Type', 'application/json');
-	
-// 	// res.json(req.file);
-// 	// res.status(200);
-// 	console.log(req.body);
-// });
-
-
-
-
-// app.use(( err, req, res, next ) => {
-// 	res.status(err.status);
-// 	res.send({"message":err.message});
-  
-//   if (err.status >= 100 && err.status < 600)
-//     res.status(err.status);
-//   else
-//     res.status(500);
-//   res.render('error');
-// });
 
 
 //------------user-------------------
@@ -96,23 +67,6 @@ app.post('/v1/register',imageUpload, userController.validator,userController.has
 			res.status(201);
 			res.send({"message": "User registered successfully"});		
 });
-
-
-
-// app.post('/v1/register',
-// imageUpload,
-// function(req,res,next){
-// 	var file = req.files;
-//   console.log(req.bodyParser);
-
-// res.end();
-// 			// res.status(201);
-// 			// res.send({"message": "User registered successfully"});
-
-		
-// });
-
-//,upload.single('image')  userController.validator,userController.hashGenerator,
 
 
 app.post('/v1/sign',loginController.validate,loginController.confirm,

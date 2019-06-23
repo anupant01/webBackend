@@ -3,3 +3,40 @@ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY "";
 
 
 killall -9 node
+
+
+
+
+
+-----------------index.js---------------------
+
+
+//   app.post('/imgUpload',imageUpload,(req,res)=>{
+// 	console.log('image uploaded')
+// 	res.statusCode = 200;
+// 	res.setHeader('Content-Type', 'application/json');
+// 	res.json(req.file);
+//   })
+
+// app.post('/v1/register',upload.single("images"), userController.validator,userController.hashGenerator,userController.registerUser, (req, res) => {
+// 	    // res.statusCode = 201;
+// 	// res.setHeader('Content-Type', 'application/json');
+	
+// 	// res.json(req.file);
+// 	// res.status(200);
+// 	console.log(req.body);
+// });
+
+
+
+
+// app.use(( err, req, res, next ) => {
+// 	res.status(err.status);
+// 	res.send({"message":err.message});
+  
+//   if (err.status >= 100 && err.status < 600)
+//     res.status(err.status);
+//   else
+//     res.status(500);
+//   res.render('error');
+// });

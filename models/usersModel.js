@@ -41,6 +41,11 @@ const usermodel = dbconfig.sequelize.define('user', {
     type: dbconfig.Sequelize.STRING,
     allowNull: false
     //allowNull defaults to true
+  },
+
+  usertype: {
+    type: dbconfig.Sequelize.STRING,
+    allowNull: false
   }
 
   },
@@ -54,7 +59,7 @@ const usermodel = dbconfig.sequelize.define('user', {
 
 
 //error handling then and catch
-usermodel.sync({force:false})
+usermodel.sync({force:true})
 .then(function(result){
 
 	 console.log(result);

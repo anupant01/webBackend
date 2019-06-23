@@ -1,6 +1,5 @@
 var  User =  require('../models/usersModel');
 const bcryptjs = require('bcryptjs');
-
 var saltRounds = 10;
 
 // validator
@@ -59,7 +58,8 @@ function registerUser(req, res, next) {
 		address: req.body.address,
 		username: req.body.username,
 		password: req.hashValue,
-		images:req.file.filename
+		images:req.file.filename,
+		usertype:'User'
 		
 
 	}).then(function (result) {
