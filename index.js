@@ -92,7 +92,6 @@ app.post('/v1/register',imageUpload,userController.validator, userController.has
 		console.log(req.body);
 		// res.setHeader();
 		// res.json(req.file);
-		// console.log(req.body)
 		res.status(201);
 		res.send({ "message": "User registered successfully" });
 	});
@@ -124,37 +123,34 @@ const craftController = require('./controllers/craftController');
 
 app.post('/v1.0/addcraft', craftImageUpload, craftController.craftAdd,
 	function (req, res, next) {
-		// next();
-		// res.setHeader('Content-Type', 'application/json');
-		// res.json(req.file);
 		console.log(req.body)
 		res.status(201);
 		res.send({ "message": "Craft successfully added" });
-		//,craftImageUpload
+	});
 
 
-		// 	console.log(req.body);
-		// res.status(200);
-		// res.send({'message':'succesfully added'});
-		// next();
+app.get("/v1.0/addcraft",craftController.getCraft,
+		function(req,res,next){
 
 
 	});
 
 
+app.delete("/v1/addcraft/:id",craftController.deleteCraft,function(req,res,next){
+		// console.log(req.params.id);
+		res.status(201);
+		//message after successfully post
+		res.send({"message": "Medicine successfully deleted"})
+		next();
+	
+	
+	})
 
-// app.post('/v1.0/addcraft',craftImageUpload,
-// 		function(req,res,next){
-// 			next();
-// 			res.setHeader('Content-Type', 'application/json');
-// 			res.json(req.file);
-// 			console.log(req.body)
-// 			res.status(201);
-// 			res.send({"message": "Craft successfully added"});
-// 			//,craftImageUpload
 
 
-// });
+
+
+
 
 
 
