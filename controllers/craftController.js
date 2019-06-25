@@ -1,26 +1,31 @@
-var {Craft} = require('../models/craftmodels');
+var craftModel = require('../models/craftmodels');
 
 //user register
-function CraftAdd(req,res,next){
-   Craft.create({
-        craftName: req.body.craftName,
-        description: req.body.craftDesc,
-        origination: req.body.craftOrigin,
-        type: req.body.craftType,
-        products: req.body.product,
-        price:req.body.craftPrice
+function craftAdd(req,res,next){
+    console.log(req.body)
+    craftModel.Craft.create({
+
+    craftName: req.body.craftName,
+    description: req.body.description,
+    origination: req.body.origination,
+    craftType: req.body.craftType,
+    products: req.body.products,
+    price:req.body.price,
+    craftimage:req.file.filename
     
     })
     
     .then(function(result){
         // next({"message":'Craft Added'})
+        console.log(result);
     
     })
     
     .catch(function(err){
+    console.log(err);
     
-    
-    next({"status":500, "message":"DB Error"}) 
+    // next({"status":500, "message":"DB Error"}) 
+
     
     
     })
@@ -29,6 +34,6 @@ function CraftAdd(req,res,next){
     }
     
     module.exports={
-        CraftAdd
+        craftAdd
         
     }

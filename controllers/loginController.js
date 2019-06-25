@@ -5,7 +5,7 @@ var jwtoken = require('jsonwebtoken');
 
 
 
-    function validate(req, res, next) {
+function validate(req, res, next) {
 
     user.usermodel.findOne({
 
@@ -13,71 +13,68 @@ var jwtoken = require('jsonwebtoken');
             username: req.body.username
         }
     })
-    // user have been already registered
-        .then(function(result) {
+        // user have been already registered
+        .then(function (result) {
 
             if (result != null) {
                 next();
             } else {
-                next({ "status":409,"message":"Credential didn't match" });
+                next({ "status": 500, "message": "Credential didn't match" });
             }
-
-
-
         })
         // err denotes the user was not found - > user was not registerd
-        .catch(function(err) {
+        .catch(function (err) {
 
             next({
-                "status": 400,
+                "status": 500,
                 "message": err
             });
 
         })
-
-
 }
+
+
 
 function confirm(req, res, next) {
     user.usermodel.findOne({
-        where: {username:req.body.username}
+        where: { username: req.body.username }
     })
 
-        .then(function(result){
-            if(result != null){
-                bcryptjs.compare(req.body.password, result.dataValues.password, function(err, res) {
-                    if(res) {
-                        next({"status":200,"message":"Valid User Login."});
+        .then(function (result) {
+            if (result != null) {
+                bcryptjs.compare(req.body.password, result.dataValues.password, function (err, res) {
+                    if (res) {
+                        next()
                     } else {
-                        next({"status":409,"message":"Credential didn't match."});
+                        next({ "status": 409, "message": "Credential didn't match." });
                     }
                 });
-            }else{
-                next({"status":409,"message":"Credential didn't match."});
+            } else {
+                next({ "status": 409, "message": "Credential didn't match." });
             }
         })
-        .catch(function(err){
-            next({"status":500, "message":"Error Occured"});
+        .catch(function (err) {
+            next({ "status": 500, "message": "Error Occured" });
         })
-        
+
 }
 
 function jwtTokenGen(req, res, next) {
 
     jwtoken.sign({
-            username: req.body.username,
-            accessLevel: 'admin'
-        }, 'mySecretKey', {
+        username: req.body.username,
+        accessLevel: 'admin'
+    }, 'mySecretKey', {
             expiresIn: "10h"
         },
 
-        function(err, token) {
-            if(err != null || undefined ){
+        function (err, token) {
+            if (err != null || undefined) {
                 console.log(err)
-                next({"status":401, "message":"Unauthorized token"})
+                next({ "status": 401, "message": "Unauthorized token" })
             }
-            else{
-                req.genToken=token;
+            else {
+                req.genToken = token;
                 next();
                 console.log(token)
             }
@@ -96,8 +93,7 @@ function sendUserData(req, res, next) {
 
         .then(function (result) {
             if (result != null) {
-                res.json(result)
-                next();
+                // res.json(result)
                 res.send(
                     {
                         "message": "Login success !",
@@ -158,11 +154,11 @@ function tokenVerify(req, res, next) {
 
 
 module.exports =
-{
+    {
 
-    validate,
-    confirm,
-    jwtTokenGen,
-    tokenVerify,
-    sendUserData
-}
+        validate,
+        confirm,
+        jwtTokenGen,
+        tokenVerify,
+        sendUserData
+    }

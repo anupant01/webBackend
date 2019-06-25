@@ -24,7 +24,7 @@ const Craft = dbconfig.sequelize.define('craft', {
     allowNull: false
     // allowNull defaults to true
   },
-  type: {
+  craftType: {
     type: dbconfig.Sequelize.STRING,
     allowNull: false
     // allowNull defaults to true
@@ -34,11 +34,16 @@ const Craft = dbconfig.sequelize.define('craft', {
       allowNull: false
         // allowNull defaults to true
       },
-
    price: {
     type: dbconfig.Sequelize.STRING,
     allowNull: false
     // allowNull defaults to true
+  }
+  ,
+  craftimage: {
+    type: dbconfig.Sequelize.STRING,
+    allowNull: false
+    //allowNull defaults to true
   }
   
 
@@ -55,10 +60,10 @@ const Craft = dbconfig.sequelize.define('craft', {
 
 
 //error handling then and catch
-Craft.sync({force:true})
+Craft.sync({force:false})
 .then(function(result){
 
-	console.log(result)
+	console.log(result ,"table created")
 
 })
 .catch(function(err){

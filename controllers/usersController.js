@@ -80,7 +80,6 @@ module.exports = {
 
 
 
-		// images:req.file.filename
 
 
 

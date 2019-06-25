@@ -62,7 +62,7 @@ const usermodel = dbconfig.sequelize.define('user', {
 usermodel.sync({force:false})
 .then(function(result){
 
-	 console.log(result);
+	 console.log(result ,"table created");
 
 })
 .catch(function(err){
