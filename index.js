@@ -24,7 +24,7 @@ app.use(function (req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 	res.setHeader('Access-Control-Allow-Headers', 'content-type');
-	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type','application/json');
+	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type', 'application/json');
 	next();
 
 })
@@ -87,7 +87,7 @@ var craftImageUpload = uploads.single('craftimage');
 
 //------------user-------------------
 // userController.validator, userController.hashGenerator, userController.registerUser,
-app.post('/v1/register',imageUpload,userController.validator, userController.hashGenerator, userController.registerUser,
+app.post('/v1/register', imageUpload, userController.validator, userController.hashGenerator, userController.registerUser,
 	function (req, res, next) {
 		console.log(req.body);
 		// res.setHeader();
@@ -112,10 +112,22 @@ app.post('/v1/sign', loginController.validate, loginController.confirm, loginCon
 
 	});
 
+app.get("/v1/register", userController.getUser,
+	function (req, res, next) {
 
-// app.get("/uploads",function(req,res,next){
-// 	res.send(publicDir)
-// })
+
+	});
+
+app.delete("/v1/register/:id", userController.deleteUser, function (req, res, next) {
+		// console.log(req.params.id);
+		res.status(201);
+		//message after successfully post
+		res.send({ "message": "User successfully deleted" })
+		next();
+	
+	})
+
+
 
 //-----------------------craft----------------------------------
 
@@ -124,32 +136,38 @@ const craftController = require('./controllers/craftController');
 app.post('/v1.0/addcraft', craftImageUpload, craftController.craftAdd,
 	function (req, res, next) {
 		console.log(req.body)
+		// console.log(req.body.craftprice)
 		res.status(201);
 		res.send({ "message": "Craft successfully added" });
 	});
 
 
-app.get("/v1.0/addcraft",craftController.getCraft,
-		function(req,res,next){
+app.get("/v1.0/addcraft", craftController.getCraft,
+	function (req, res, next) {
 
 
 	});
 
 
-app.delete("/v1/addcraft/:id",craftController.deleteCraft,function(req,res,next){
-		// console.log(req.params.id);
-		res.status(201);
-		//message after successfully post
-		res.send({"message": "Medicine successfully deleted"})
-		next();
-	
-	
-	})
+app.delete("/v1/addcraft/:id", craftController.deleteCraft, function (req, res, next) {
+	// console.log(req.params.id);
+	res.status(201);
+	//message after successfully post
+	res.send({ "message": "Craft successfully deleted" })
+	next();
+
+})
+
+
+app.get('/v1.0/addcraft:id', craftController.getindividualCraft, function (req, res) {
+	console.log(req.params.id);
+})
+
+app.put('/v1.0/addcraft:id', craftController.updateCraft, function (req, res) {
 
 
 
-
-
+})
 
 
 

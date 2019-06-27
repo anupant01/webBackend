@@ -35,38 +35,84 @@ function craftAdd(req, res, next) {
 
 
 //get craft
-function getCraft(req,res,next){
-  
+function getCraft(req, res, next) {
+
 
     craftModel.Craft.findAll({
 
-        attributes:['id','craftName','description','origination','craftType','products','price']
+        attributes: ['id', 'craftName', 'description', 'origination', 'craftType', 'products', 'price','craftimage']
     })
-        .then(function (result){
+        .then(function (result) {
             res.json(result);
         })
-        .catch(function (err){
+        .catch(function (err) {
 
         })
 }
 
 
 //delete
-function deleteCraft(req,res,next){
+function deleteCraft(req, res, next) {
     craftModel.Craft.destroy({
-        where:{id:req.params.id}
+        where: { id: req.params.id }
     })
-        .then(function(){
+        .then(function () {
             res.status(200);
             res.send({
-                "message":"medicine deleted successfully"
+                "message": "craft deleted successfully"
             })
 
         })
         .catch(function (err) {
-            next({"status":500,"message":"couldnot deleted"})
+            next({ "status": 500, "message": "couldnot deleted" })
         })
     next()
+}
+
+
+
+function getindividualCraft(req,res){
+    craftModel.Craft.findOne({
+        where:{id:req.params.id}
+    })
+        .then(function (result) {
+            res.status(200);
+            res.json(result);
+            
+        })
+        .catch(function(err){
+            res.json(err);
+        })
+    }
+    
+
+ 
+
+//update
+function updateCraft(req, res) {
+    craftModel.Craft.update({
+        craftName: req.body.craftName,
+        description: req.body.description,
+        origination: req.body.origination,
+        craftType: req.body.craftType,
+        products: req.body.products,
+        price: req.body.price
+    }, {
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(function (result) {
+            res.status(201);
+            res.send({
+                "message": "Craft updated successfully"
+            })
+        })
+        .catch(function (err) {
+
+            console.log(err);
+
+        })
 }
 
 
@@ -75,6 +121,8 @@ function deleteCraft(req,res,next){
 module.exports = {
     craftAdd,
     getCraft,
-    deleteCraft
+    deleteCraft,
+    getindividualCraft,
+    updateCraft
 
 }

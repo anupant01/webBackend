@@ -72,10 +72,58 @@ function registerUser(req, res, next) {
 }
 
 
+
+//get user
+function getUser(req, res, next) {
+
+
+    User.usermodel.findAll({
+
+        attributes: ['id', 'firstName', 'lastName', 'email', 'address', 'username','images']
+    })
+        .then(function (result) {
+            res.json(result);
+        })
+        .catch(function (err) {
+
+        })
+}
+
+//delete
+function deleteUser(req, res, next) {
+    User.usermodel.destroy({
+        where: { id: req.params.id }
+    })
+        .then(function () {
+            res.status(200);
+            res.send({
+                "message": "user deleted successfully"
+            })
+
+        })
+        .catch(function (err) {
+            next({ "status": 500, "message": "couldnot deleted" })
+        })
+    next()
+}
+
+
+
+
+
+
+
+
+
+
 module.exports = {
 	registerUser, 
 	hashGenerator,
-	validator
+	validator,
+	getUser,
+	deleteUser,
+
+
 }
 
 
