@@ -44,7 +44,7 @@ function confirm(req, res, next) {
             if (result != null) {
                 bcryptjs.compare(req.body.password, result.dataValues.password, function (err, res) {
                     if (res) {
-                        next()
+                        next();
                     } else {
                         next({ "status": 409, "message": "Credential didn't match." });
                     }
@@ -76,7 +76,7 @@ function jwtTokenGen(req, res, next) {
             else {
                 req.genToken = token;
                 next();
-                console.log(token)
+                console.log('token: ', token);
             }
 
         }
@@ -136,22 +136,6 @@ function tokenVerify(req, res, next) {
 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports =
     {

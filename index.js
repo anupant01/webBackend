@@ -9,6 +9,7 @@ var fs = require('fs');
 
 var cors = require('cors');
 
+
 var userController = require('./controllers/usersController');
 const loginController = require('./controllers/loginController');
 
@@ -28,6 +29,10 @@ app.use(function (req, res, next) {
 	next();
 
 })
+
+
+
+
 
 
 //-------------------multer-------------------------------------------------
@@ -108,9 +113,15 @@ app.post('/v1/sign', loginController.validate, loginController.confirm, loginCon
 			}
 		);
 
-
-
 	});
+
+	// app.post('/v1/auth', loginController.validate, loginController.confirm,
+	// function (req, res, next) {
+	// 	res.status(200);
+	// 	res.send({'message':'succesfully login'});
+
+	// });
+
 
 app.get("/v1/register", userController.getUser,
 	function (req, res, next) {
@@ -169,8 +180,14 @@ app.put('/v1.0/addcraft:id', craftController.updateCraft, function (req, res) {
 
 })
 
+// -------------------------------------------------------------------
+var feedbackController = require('./controllers/feedbackController')
 
 
+app.post('/v1/feedback',feedbackController.feedbackAdd,function (req,res) {
+    res.status(201);
+    res.send({"message":"Message sent successful"});
+});
 
 
 //error catching

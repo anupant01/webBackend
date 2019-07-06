@@ -1,6 +1,6 @@
 var craftModel = require('../models/craftmodels');
 
-//user register
+//craft register
 function craftAdd(req, res, next) {
     console.log(req.body)
     craftModel.Craft.create({

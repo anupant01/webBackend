@@ -6,12 +6,12 @@ var saltRounds = 10;
 function validator(req, res, next) {
 	// console.log(req.body);
 
-	console.log(req.body.username)
+	// console.log(req.body.username)
 	User.usermodel.findOne({
 		where: { username: req.body.username }
 	})
 		.then(function (result) {
-			console.log(result.dataValues);
+			// console.log(result.dataValues);
 			if (result.dataValues != '') {
 				next({ "status": 409, "message": 'user already exists' })
 			}
@@ -32,7 +32,7 @@ function hashGenerator(req, res, next) {
 	// console.log(req.body.password)
 	bcryptjs.hash(req.body.password , saltRounds)
 		.then(function (hash) {
-			console.log(hash);
+			// console.log(hash);
 			req.hashValue = hash;
 			next();
 
@@ -48,8 +48,8 @@ function hashGenerator(req, res, next) {
 
 //user register
 function registerUser(req, res, next) {
-	console.log(req.body);
-	console.log(req.file.filename);
+	// console.log(req.body);
+	// console.log(req.file.filename);
 
 	User.usermodel.create({
 		firstName: req.body.firstName,
