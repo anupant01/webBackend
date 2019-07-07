@@ -28,6 +28,45 @@ function feedbackAdd(req, res, next) {
 
 }
 
+
+//get
+
+function getFeedback(req, res, next) {
+
+
+    feedbackModel.FeedBack.findAll({
+
+        attributes: ['id', 'firstName',  'email', 'feedback']
+    })
+        .then(function (result) {
+            res.json(result);
+        })
+        .catch(function (err) {
+
+        })
+}
+
+
+//delete
+function deleteFeedback(req, res, next) {
+    feedbackModel.FeedBack.destroy({
+        where: { id: req.params.id }
+    })
+        .then(function () {
+            res.status(200);
+            res.send({
+                "message": "feedback deleted successfully"
+            })
+
+        })
+        .catch(function (err) {
+            next({ "status": 500, "message": "couldnot deleted" })
+        })
+    next()
+}
+
 module.exports = {
-    feedbackAdd
+    feedbackAdd,
+    getFeedback,
+    deleteFeedback
 }

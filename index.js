@@ -189,6 +189,21 @@ app.post('/v1/feedback',feedbackController.feedbackAdd,function (req,res) {
     res.send({"message":"Message sent successful"});
 });
 
+app.get("/v1/feedback", feedbackController.getFeedback,
+	function (req, res, next) {
+
+
+	});
+
+app.delete("/v1/feedback/:id", feedbackController.deleteFeedback, function (req, res, next) {
+	// console.log(req.params.id);
+	res.status(201);
+	//message after successfully post
+	res.send({ "message": "Feedback successfully deleted" })
+	next();
+
+})
+
 
 //error catching
 app.use(function (err, req, res, next) {
@@ -201,7 +216,20 @@ app.use(function (err, req, res, next) {
 	console.log(err.message);
 })
 
+/*hosting uploads folder */
 
+// var publicDir = require('path').join(__filename,'/images/craft');
+// app.use(express.static(publicDir));
+
+// app.use(express.static('public'));
+
+// //Serves all the request which includes /images in the url from Images folder
+// app.use('/images/craft', express.static(__dirname + '/images/craft'));
+
+
+// app.get("/images/craft",function(req,res,next){
+//     res.send(publicDir)
+// })
 
 
 // ---------------------------------------------------------------
