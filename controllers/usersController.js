@@ -110,6 +110,21 @@ function deleteUser(req, res, next) {
 
 
 
+//get user
+function viewUser(req, res, next) {
+
+
+    User.usermodel.findAll({
+
+        attributes: ['firstName', 'lastName', 'email', 'address']
+    })
+        .then(function (result) {
+            res.json(result);
+        })
+        .catch(function (err) {
+			console.log(err);
+        })
+}
 
 
 
@@ -122,6 +137,7 @@ module.exports = {
 	validator,
 	getUser,
 	deleteUser,
+	viewUser
 
 
 }

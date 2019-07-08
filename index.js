@@ -138,7 +138,11 @@ app.delete("/v1/register/:id", userController.deleteUser, function (req, res, ne
 	
 	})
 
+app.get("/v1/userView", userController.viewUser,
+	function (req, res, next) {
 
+
+	});
 
 //-----------------------craft----------------------------------
 
@@ -157,7 +161,7 @@ app.get("/v1.0/addcraft", craftController.getCraft,
 	function (req, res, next) {
 
 
-	});
+});
 
 
 app.delete("/v1/addcraft/:id", craftController.deleteCraft, function (req, res, next) {
@@ -179,6 +183,12 @@ app.put('/v1.0/addcraft:id', craftController.updateCraft, function (req, res) {
 
 
 })
+
+
+app.get('/v1/craftView',craftController.viewCraft,function (req,res,next) {
+
+})
+
 
 // -------------------------------------------------------------------
 var feedbackController = require('./controllers/feedbackController')
@@ -216,20 +226,34 @@ app.use(function (err, req, res, next) {
 	console.log(err.message);
 })
 
-/*hosting uploads folder */
+/*hosting uploads folder for craft */
 
-// var publicDir = require('path').join(__filename,'/images/craft');
-// app.use(express.static(publicDir));
+var publicDir = require('path').join(__filename,'/images/craft');
+app.use(express.static(publicDir));
 
-// app.use(express.static('public'));
+app.use(express.static('public'));
 
-// //Serves all the request which includes /images in the url from Images folder
-// app.use('/images/craft', express.static(__dirname + '/images/craft'));
+//Serves all the request which includes /images in the url from Images folder
+app.use('/images/craft', express.static(__dirname + '/images/craft'));
 
 
-// app.get("/images/craft",function(req,res,next){
-//     res.send(publicDir)
-// })
+app.get("/images/craft",function(req,res,next){
+    res.send(publicDir)
+})
+
+/*hosting uploads folder for user */
+var publicDir = require('path').join(__filename,'/images/upload');
+app.use(express.static(publicDir));
+
+app.use(express.static('public'));
+
+//Serves all the request which includes /images in the url from Images folder
+app.use('/images/upload', express.static(__dirname + '/images/upload'));
+
+
+app.get("/images/upload",function(req,res,next){
+    res.send(publicDir)
+})
 
 
 // ---------------------------------------------------------------

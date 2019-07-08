@@ -116,6 +116,24 @@ function updateCraft(req, res) {
 }
 
 
+  
+
+        function viewCraft(req, res, next) {
+
+
+            craftModel.Craft.findAll({
+        
+                attributes: ['id', 'craftName', 'description', 'origination', 'craftType', 'products', 'price','craftimage']
+            })
+                .then(function (result) {
+                    res.json(result);
+                })
+                .catch(function (err) {
+        
+                })
+        }
+
+
 
 
 module.exports = {
@@ -123,6 +141,7 @@ module.exports = {
     getCraft,
     deleteCraft,
     getindividualCraft,
-    updateCraft
+    updateCraft,
+    viewCraft
 
 }
