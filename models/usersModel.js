@@ -57,7 +57,7 @@ const usermodel = dbconfig.sequelize.define('user', {
 usermodel.sync({force:false})
 .then(function(result){
 
-	 console.log(result ,"table created");
+	//  console.log(result ,"table created");
 
 })
 .catch(function(err){
@@ -73,10 +73,3 @@ module.exports={
 
 
 
-
-  // images: {
-  //   type: dbconfig.Sequelize.STRING,
-  //   allowNull: false
-    // allowNull defaults to true
-
-//}

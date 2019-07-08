@@ -63,7 +63,7 @@ const Craft = dbconfig.sequelize.define('craft', {
 Craft.sync({force:false})
 .then(function(result){
 
-	console.log(result ,"table created")
+	// console.log(result ,"table created")
 
 })
 .catch(function(err){

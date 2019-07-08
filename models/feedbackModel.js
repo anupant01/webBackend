@@ -38,7 +38,7 @@ const FeedBack= dbconfig.sequelize.define('feedback', {
 FeedBack.sync({force:false})
 .then(function(result){
 
-	 console.log(result ,"table created");
+	//  console.log(result ,"table created");
 
 })
 .catch(function(err){

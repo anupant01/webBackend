@@ -191,6 +191,45 @@ app.get("/v1/user/:id",
 
 const craftController = require('./controllers/craftController');
 
+// /**
+//  * Craft Testing
+//  * @swagger
+//  * /v1.0/addcraft:
+//  *   post:
+//  *     tags:
+//  *      - Item
+//  *     name: Add Craft
+//  *     summary: This API add one craft at a Time
+//  *     description: Add a single craft
+//  *     produces: application/json
+//  *     parameters:
+//  *     - name: craft
+//  *       in: body
+//  *       schema:
+//  *         type: object
+//  *         properties:
+//  *          craftName:   
+//  *           type: string
+//  *          description:
+//  *           type: integer
+//  *          origination:
+//  *           type: string
+//  *          craftType:
+//  *           type: string
+//  * 			products:
+//  * 			type: string
+//  *  		price:
+//  * 			type: string
+//  * 			craftimage:
+//  * 			type: string
+//  *     responses:
+//  *       201:
+//  *         description:Craft added
+//  *       500:
+//  *        description: Database Error
+//  *
+//  */
+
 app.post('/v1.0/addcraft', craftImageUpload, craftController.craftAdd,
 	function (req, res, next) {
 		console.log(req.body)
@@ -199,14 +238,52 @@ app.post('/v1.0/addcraft', craftImageUpload, craftController.craftAdd,
 		res.send({ "message": "Craft successfully added" });
 	});
 
-
+/**
+ * @swagger
+ * /v1.0/addcraft:
+ *   get:
+ *     tags:
+ *       - Craft
+ *     name: Find Crafts
+ *     summary: Finds all Craft from database
+ *     security:
+ *       - bearerAuth: []
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: A single user object
+ *       500:
+ *         description: No auth token
+ */
 app.get("/v1.0/addcraft", craftController.getCraft,
 	function (req, res, next) {
 
 
 });
 
-
+/**
+ * @swagger
+ * /v1/addcraft/{id}:
+ *   delete:
+ *     tags:
+ *       - Craft
+ *     description: Deletes a single Craft
+ *     summary: Delete Craft
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: craftid
+ *         description: craft's id
+ *         in: path
+ *         required: true
+ *         type: integer
+ *     responses:
+ *       200:
+ *         description: Successfully deleted
+ */
 app.delete("/v1/addcraft/:id", craftController.deleteCraft, function (req, res, next) {
 	// console.log(req.params.id);
 	res.status(201);
@@ -216,6 +293,33 @@ app.delete("/v1/addcraft/:id", craftController.deleteCraft, function (req, res, 
 
 })
 
+
+/**
+ * @swagger
+ *  /v1.0/addcraft/{id}:
+ *   get:
+ *     tags:
+ *       - Craft
+ *     name: Find Craft
+ *     summary: Finds individual Craft by Craft id in database
+ *     security:
+ *       - bearerAuth: []
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: craft
+ *         description: craft's id
+ *         in: path
+ *         required: true
+ *         type: integer
+ *     responses:
+ *       200:
+ *         description: A single user object
+ *       500:
+ *         description: No auth token
+ */
 
 app.get('/v1.0/addcraft:id', craftController.getindividualCraft, function (req, res) {
 	console.log(req.params.id);
