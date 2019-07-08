@@ -28,7 +28,7 @@ describe('Users', function () {
                 .send({
                     'firstName':'Anu','lastName':'Pant','email':'a@gmail.com',
                     'address':'jorpati','username':'anu','password':'a',
-                    'image':'pikachu.jpeg-1561709253223.jpeg','userType':'User'
+                    'userType':'User'
                 })
                 .end(function (err,res) {
                    // res.should.have.status(200)
@@ -37,3 +37,22 @@ describe('Users', function () {
         })
     })
 })
+
+describe('PUT User', function() {
+    userid = 2;
+    it('it should edit the user with new values', function(done) {
+        chai.request(server)
+            .put('/v1/user/' + userid)
+            .send({
+                'address': 'Kathmandu',
+               
+            })
+            .end(function(err, res) {
+                res.should.have.status(201);
+                res.body.should.have.property('message');
+                done();
+            })
+    })
+
+
+});
