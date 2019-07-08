@@ -37,11 +37,6 @@ const usermodel = dbconfig.sequelize.define('user', {
     type: dbconfig.Sequelize.STRING,
     allowNull: false
   },
-    images: {
-    type: dbconfig.Sequelize.STRING,
-    allowNull: false
-    //allowNull defaults to true
-  },
 
   usertype: {
     type: dbconfig.Sequelize.STRING,

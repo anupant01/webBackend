@@ -58,7 +58,6 @@ function registerUser(req, res, next) {
 		address: req.body.address,
 		username: req.body.username,
 		password: req.hashValue,
-		images:req.file.filename,
 		usertype:'User'
 		
 
@@ -79,7 +78,7 @@ function getUser(req, res, next) {
 
     User.usermodel.findAll({
 
-        attributes: ['id', 'firstName', 'lastName', 'email', 'address', 'username','images']
+        attributes: ['id', 'firstName', 'lastName', 'email', 'address', 'username']
     })
         .then(function (result) {
             res.json(result);
@@ -89,7 +88,7 @@ function getUser(req, res, next) {
         })
 }
 
-//delete
+//delete ,'images'
 function deleteUser(req, res, next) {
     User.usermodel.destroy({
         where: { id: req.params.id }

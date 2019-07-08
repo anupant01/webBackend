@@ -63,41 +63,7 @@ app.use(function (req, res, next) {
 
 })
 
-
-
-
-
-
-//-------------------multer-------------------------------------------------
-
-//--------------------user profile
-
-var assetStorage = multer.diskStorage({
-	destination: './images/upload',
-	filename: (req, file, callback) => {
-		let ext = path.extname(file.originalname);
-		callback(null, file.originalname + '-' + Date.now() + ext);
-	}
-});
-
-var imageFileFilter = (req, file, cb) => {
-	if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
-		return cb(new Error('You can upload only image files!'), false);
-	}
-	cb(null, true);
-}
-
-
-var upload = multer({
-	storage: assetStorage,
-	fileFilter: imageFileFilter,
-	limits: { fileSize: 10000000 }
-})
-
-var imageUpload = upload.single('images');
-
-
-// ---------------------------------craft-------------------------
+// ----------------multer-----------------craft-------------------------
 
 var craftStorage = multer.diskStorage({
 	destination: './images/craft',
@@ -125,11 +91,9 @@ var craftImageUpload = uploads.single('craftimage');
 
 //------------user-------------------
 // userController.validator, userController.hashGenerator, userController.registerUser,
-app.post('/v1/register', imageUpload, userController.validator, userController.hashGenerator, userController.registerUser,
+app.post('/v1/register',  userController.validator, userController.hashGenerator, userController.registerUser,
 	function (req, res, next) {
 		console.log(req.body);
-		// res.setHeader();
-		// res.json(req.file);
 		res.status(201);
 		res.send({ "message": "User registered successfully" });
 	});
@@ -178,12 +142,7 @@ app.post('/v1/sign', loginController.validate, loginController.confirm, loginCon
 
 	});
 
-	// app.post('/v1/auth', loginController.validate, loginController.confirm,
-	// function (req, res, next) {
-	// 	res.status(200);
-	// 	res.send({'message':'succesfully login'});
 
-	// });
 
 
 app.get("/v1/register", userController.getUser,
@@ -325,19 +284,19 @@ app.get("/images/craft",function(req,res,next){
     res.send(publicDir)
 })
 
-/*hosting uploads folder for user */
-var publicDir = require('path').join(__filename,'/images/upload');
-app.use(express.static(publicDir));
+// /*hosting uploads folder for user */
+// var publicDir = require('path').join(__filename,'/images/upload');
+// app.use(express.static(publicDir));
 
-app.use(express.static('public'));
+// app.use(express.static('public'));
 
-//Serves all the request which includes /images in the url from Images folder
-app.use('/images/upload', express.static(__dirname + '/images/upload'));
+// //Serves all the request which includes /images in the url from Images folder
+// app.use('/images/upload', express.static(__dirname + '/images/upload'));
 
 
-app.get("/images/upload",function(req,res,next){
-    res.send(publicDir)
-})
+// app.get("/images/upload",function(req,res,next){
+//     res.send(publicDir)
+// })
 
 
 // ---------------------------------------------------------------
