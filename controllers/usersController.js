@@ -109,21 +109,35 @@ function deleteUser(req, res, next) {
 
 
 
-
-//get user
-function viewUser(req, res, next) {
-
-
-    User.usermodel.findAll({
-
-        attributes: ['firstName', 'lastName', 'email', 'address']
-    })
-        .then(function (result) {
-            res.json(result);
+//update user
+function updateUser(req,res,next){
+    User.usermodel.update(
+        {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email:req.body.email,
+            address:req.body.address
+          
+        }, {
+            where: {
+                id: req.params.id
+            }
         })
-        .catch(function (err) {
-			console.log(err);
+        .then(function(result){
+            res.status(201);
+            res.send({
+                "message":"profile updated"
+            })
         })
+        .catch(function(err)
+        {
+            //to show error if any mistake is occured in addEmployee function.
+            //extraNote: whenever we write some thing in next by defaultly it
+            //will go to error.
+            next({"status":500, "message":"Something went wrong"});
+            console.log(err)
+        })
+
 }
 
 
@@ -137,7 +151,8 @@ module.exports = {
 	validator,
 	getUser,
 	deleteUser,
-	viewUser
+	updateUser
+	
 
 
 }

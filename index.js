@@ -9,6 +9,39 @@ var fs = require('fs');
 
 var cors = require('cors');
 
+var swaggerUi = require("swagger-ui-express");
+var swaggerJSDoc = require("swagger-jsdoc");
+
+var swaggerDefinition = {
+
+	info: {
+		// API informations (required)
+		title: 'Craft Info', // Title (required)
+		version: 'v1.0.1', // Version (required)
+		description: 'API documentation', // Description (optional)
+	},
+	host: 'localhost:7000', // Host (optional)
+	basePath: '/', // Base path (optional)
+	securityDefinitions : {
+		bearerAuth : {
+			type: 'apiKey',
+			name: 'authorization',
+			scheme : 'bearer',
+			in : 'header'
+		}
+	}
+}
+
+var options = {
+	swaggerDefinition,
+	apis:['./index.js']
+}
+
+const swaggerSpec = swaggerJSDoc(options);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, options));
+
+
+
 
 var userController = require('./controllers/usersController');
 const loginController = require('./controllers/loginController');
@@ -102,6 +135,35 @@ app.post('/v1/register', imageUpload, userController.validator, userController.h
 	});
 
 
+/**
+ * Login Testing
+ * @swagger
+ * /v1/sign:
+ *   post:
+ *     tags:
+ *      - Users
+ *     name: Resigister name
+ *     summary: This API login a single  user
+ *     description: login a single user
+ *     produces: application/json
+ *     parameters:
+ *     - name: user
+ *       in: body
+ *       schema:
+ *         type: object
+ *         properties:
+ *          username:
+ *           type: string
+ *          password:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Login success
+ *       500:
+ *        description: DB Error
+ *
+ */
+
 app.post('/v1/sign', loginController.validate, loginController.confirm, loginController.jwtTokenGen, loginController.sendUserData,
 	function (req, res, next) {
 		res.status(200);
@@ -112,6 +174,7 @@ app.post('/v1/sign', loginController.validate, loginController.confirm, loginCon
 				"result": result
 			}
 		);
+		// req.json("message": "Login success !")
 
 	});
 
@@ -137,12 +200,33 @@ app.delete("/v1/register/:id", userController.deleteUser, function (req, res, ne
 		next();
 	
 	})
-
-app.get("/v1/userView", userController.viewUser,
+const usermodel = require('./models/usersModel')
+app.get("/v1/user/:id",
 	function (req, res, next) {
+		console.log(req.params.id);
+		usermodel.usermodel.findAll({
+			where:{id:req.params.id}
+			
+		})
+			.then(function (result) {
+			
+				res.json(result);
+				console.log(result)
+			})
+			.catch(function (err) {
+				res.json(err)
+				console.log(err);
+			})
 
 
 	});
+
+
+	app.put("/v1/user/:id",userController.updateUser,function (req,res) {
+	
+		res.send({"message":"user data updated successfully"});
+	});
+	
 
 //-----------------------craft----------------------------------
 
@@ -266,6 +350,6 @@ app.listen(port, () => {
 	}
 });
 
-
+module.exports= app;
 
 
