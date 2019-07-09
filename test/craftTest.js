@@ -43,42 +43,46 @@ describe('Craft', function () {
     })
 })
 
-// //getting
-// describe('Item', () => {
-//     describe('/GET Item info', () => {
-//         it('this should GET all the Item', (done) => {
-//             chai.request(server)
-//                 .get('/v1.0/dashboard')
-//                 .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJpYmVrIiwiYWNjZXNzTGV2ZWwiOiJhZG1pbiIsImlhdCI6MTU2MjQ3OTg3OSwiZXhwIjoxNTYyNTE1ODc5fQ.MJw3aun7-AdL42YOKSEAqtFOa_z5drFYQIc54of3tjw')
-//                 .end((err, res) => {
-//                     // console.log(err);
-//                     // console.log(res);
-//                     res.should.have.status(200);
-//                     res.body.should.be.an('array');
-//                     //match fieldnames with your respective model class
-//                     res.body.should.all.have.property('itemid');
-//                     res.body.should.all.have.property('newitemname');
-//                     res.body.should.all.have.property('newitemquantity');
-//                     res.body.should.all.have.property('newitemcomname');
-//                     res.body.should.all.have.property('newitemdesc');
-//                     res.body.length.should.be.above(0);
-//                     done();
-//                 })
-//         })
-//     })
-// })
+//getting
+describe('Craft', () => {
+    describe('/GET Craft info', () => {
+        it('this should GET all the Craft', (done) => {
+            chai.request(server)
+                .get('/v1.0/addcraft')
+                .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImEiLCJhY2Nlc3NMZXZlbCI6ImFkbWluIiwiaWF0IjoxNTYyNjU1MTA4LCJleHAiOjE1NjI2OTExMDh9.E1K7Bq7zJh6Ge3kkhriq2EnHWUM2HZCGBnI--jHPLyo')
+                .end((err, res) => {
+                    // console.log(err);
+                    // console.log(res);
+                    res.should.have.status(200);
+                    res.body.should.be.an('array');
+                    //match fieldnames with your respective model class
+                    res.body.should.all.have.property('id');
+                    res.body.should.all.have.property('craftName');
+                    res.body.should.all.have.property('description');
+                    res.body.should.all.have.property('origination');
+                    res.body.should.all.have.property('products');
+                    res.body.should.all.have.property('price');
+                    res.body.should.all.have.property('craftimage');
+                    res.body.length.should.be.above(0);
+                    done();
+                })
+        })
+    })
+
+})
 
 // //update testing
-// describe('Item', function(){
-//     describe('update Item', function(){
-//         itemid = 22; //put your id from database table
-//         it('this should update the Item', function(done){
+// describe('Craft', function(){
+//     describe('update Craft', function(){
+//        id = 1; //put your id from database table
+//         it('this should update the Craft', function(done){
 //             chai.request(server)
-//                 .put('/v1.0/dashboard/' + itemid)
+//                 .put('/v1.0/addcraft/' + id)
 //                 .send({
 //                     //match fieldnames with your respective model class
-//                     'newitemquantity':'500',
-//                     'newitemdesc':'You will know'
+//                     'origination':'Thamel',
+//                     'price':'500'
+                   
 //                 })
 //                 .end(function (err,res) {
 //                     res.should.have.status(201);
@@ -91,18 +95,18 @@ describe('Craft', function () {
 //     })
 // });
 
-// //delete testing
-// describe('delete Item', function() {
-//     itemid = 23;//put your id from database table
-//     it('this should delete the Item', function(done) {
-//         chai.request(server)
-//             .delete('/v1.0/notes/' + itemid)
-//             .end(function(err, res) {
-//                 res.should.have.status(201);
-//                 res.body.should.have.property('message');
-//                 done();
-//             })
-//     })
+//delete testing
+describe('delete Craft', function() {
+   id = 2;//put your id from database table
+    it('this should delete the Item', function(done) {
+        chai.request(server)
+            .delete('/v1.0/addcraft/' + id)
+            .end(function(err, res) {
+                res.should.have.status(201);
+                res.body.should.have.property('message');
+                done();
+            })
+    })
 
 
-// });
+});
