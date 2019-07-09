@@ -325,6 +325,38 @@ app.get('/v1.0/addcraft:id', craftController.getindividualCraft, function (req, 
 	console.log(req.params.id);
 })
 
+/**
+ * @swagger
+ * /v1.0/addcraft/{id}:
+ *   put:
+ *     tags:
+ *      - Craft
+ *     description: Updates a single Craft
+ *     produces: application/json
+ *     parameters:
+ *     - name: id
+ *       in: path
+ *       description: id
+ *     - name: user
+ *       in: body
+ *       schema:
+ *         type: object
+ *         properties:
+ *          craftName:
+ *           type: string
+ *          description:
+ *           type: integer
+ *          origination:
+ *           type: string
+ *          products:
+ *           type: string
+ * 			price:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successfully updated
+ */
+
 app.put('/v1.0/addcraft:id', craftController.updateCraft, function (req, res) {
 
 
@@ -340,7 +372,35 @@ app.get('/v1/craftView',craftController.viewCraft,function (req,res,next) {
 // -------------------------------------------------------------------
 var feedbackController = require('./controllers/feedbackController')
 
-
+/**
+ * @swagger
+ * /v1/feedback:
+ *   post:
+ *     tags:
+ *      - feedback
+ *     name: Add feedback Details
+ *     summary: This API add one feedback at a Time
+ *     description: Add a single feedback
+ *     produces: application/json
+ *     parameters:
+ *     - name: feedback
+ *       in: body
+ *       schema:
+ *         type: object
+ *         properties:
+ *          firstName:
+ *           type: string
+ *          email:
+ *           type: string
+ *  		feedback:
+ *           type: string
+ *     responses:
+ *       201:
+ *         description: Feedback added
+ *       500:
+ *        description: Database Error
+ *
+ */
 app.post('/v1/feedback',feedbackController.feedbackAdd,function (req,res) {
     res.status(201);
     res.send({"message":"Message sent successful"});
