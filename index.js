@@ -218,11 +218,11 @@ const craftController = require('./controllers/craftController');
 //  *           type: string
 //  * 			products:
 //  * 			type: string
-//  *  		price:
-//  * 			type: string
-//  * 			craftimage:
-//  * 			type: string
-//  *     responses:
+//  * price:
+//  * type:string
+//  *  craftimage:
+//  * type:string
+//  * responses:
 //  *       201:
 //  *         description:Craft added
 //  *       500:
@@ -352,7 +352,7 @@ app.get('/v1.0/addcraft:id', craftController.getindividualCraft, function (req, 
  *           type: string
  * 			price:
  *           type: string
- *     responses:
+ * responses:
  *       200:
  *         description: Successfully updated
  */
@@ -392,9 +392,9 @@ var feedbackController = require('./controllers/feedbackController')
  *           type: string
  *          email:
  *           type: string
- *  		feedback:
- *           type: string
- *     responses:
+ * feedback:
+ * type: string
+ * responses: 
  *       201:
  *         description: Feedback added
  *       500:
