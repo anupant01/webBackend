@@ -55,7 +55,7 @@ const Craft = dbconfig.sequelize.define('craft', {
 
 
 //error handling then and catch
-Craft.sync({force:true})
+Craft.sync({force:false})
 .then(function(result){
 
 	// console.log(result ,"table created")
