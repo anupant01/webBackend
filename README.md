@@ -50,9 +50,11 @@ npm version:6.9.0 </li>
    <li> sequelize: ^5.8.11   </li>
    <li> swagger-jsdoc: ^3.2.9  </li>
    <li> swagger-ui-express: ^4.0.7  </li>
+<hr>
 
+<h3>Route</h3>
 <ul style="list-style-type:disc;">
-<li>Route</li>
+
 <li>for register:/v1/register</li>
 <li>for login:/v1/sign</li>
 <li>for add craft:/v1.0/addcraft</li>
