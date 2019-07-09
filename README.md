@@ -27,34 +27,36 @@ Brief description of the domain of your project!
 </ul> 
 
 ## API Documentation
+ 
+port:7000 </li>
+start the server by npm run start </li>
+node version:10.15.3 </li>
+npm version:6.9.0 </li>
 
-port:7000
-start the server by npm run start
-node version:10.15.3
-npm version:6.9.0
-dependencies:
- "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
-    "chai": "^4.2.0",
-    "chai-http": "^4.3.0",
-    "chai-things": "^0.2.0",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "joi": "^14.3.1",
-    "jsonwebtoken": "^8.5.1",
-    "multer": "^1.4.1",
-    "mysql2": "^1.6.5",
-    "nodemon": "^1.19.1",
-    "sequelize": "^5.8.11",
-    "swagger-jsdoc": "^3.2.9",
-    "swagger-ui-express": "^4.0.7"
+<ul style="list-style-type:disc;">
+<li>dependencies:</li>
+ <li>bcryptjs: ^2.4.3</li>
+  <li>  body-parse: ^1.19.0</li>
+  <li>  chai: ^4.2.0</li>
+  <li>  chai-http: ^4.3.0 </li>
+  <li>  chai-things: ^0.2.0 </li>
+  <li>  cors: ^2.8.5 </li>
+   <li> express: ^4.17.1 </li>
+   <li> joi: ^14.3.1 </li>
+    <li>jsonwebtoken: ^8.5.1 </li>
+   <li> multer: ^1.4.1 </li>
+    <li>mysql2: ^1.6.5 </li>
+   <li> nodemon: ^1.19.1 </li>
+   <li> sequelize: ^5.8.11   </li>
+   <li> swagger-jsdoc: ^3.2.9  </li>
+   <li> swagger-ui-express: ^4.0.7  </li>
 
-
-Route
-for register:/v1/register
-for login:/v1/sign
-for add craft:/v1.0/addcraft
-for feedback:/v1/feedback
+<ul style="list-style-type:disc;">
+<li>Route</li>
+<li>for register:/v1/register</li>
+<li>for login:/v1/sign</li>
+<li>for add craft:/v1.0/addcraft</li>
+<li>for feedback:/v1/feedback</li>
 
 Youtube video link:
 https://youtu.be/3MDl784e6Mg
