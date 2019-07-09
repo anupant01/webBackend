@@ -6,15 +6,25 @@ CollegeID: 170007
 Batch: Jan19C
 
 Brief description of the domain of your project!
+<ul style="list-style-type:circle;">
+<li>This web application will provide the information about the craft available within the community as well as the country. This application help the user to make their place known to the tourist and also help to make the endangered craft available. It will also help to provide the historical information about the craft and the place where the craft is available. This will also help the people know about the craft available to them. Craft make the house attractive to the other people. </li>
+ <li>the user can register and login in the system. the user can update their profile.</li>
+ <li> the user can view and add the craft information</li>
+ <li> the user can send feedback to the admin </li>
 
-This web application will provide the information about the craft available within the community as well as the country. This application help the user to make their place known to the tourist and also help to make the endangered craft available. It will also help to provide the historical information about the craft and the place where the craft is available. This will also help the people know about the craft available to them. Craft make the house attractive to the other people. 
- the user can register and login in the syste
+ <li>The admin can also add the craft information a well as edit the craft and delete craft</li>
+ <li> the admin can only view and delete the user and feedback provided by the user</li>
+
 
 ## List of Main Features
-<h1> User can register and login</h1>
-<h1>Dashboard with the detailed information about the craft</h1>
-<h1> user can edit their profile</h1>
-<h1>user can add the craft</h1>
+
+ <ul style="list-style-type:circle;">
+  <li>User can register and login</li>
+<li>Dashboard with the detailed information about the craft</li>
+<li> user can edit their profile</li>
+<li>user can add the craft</li>
+  
+</ul> 
 
 ## API Documentation
 
