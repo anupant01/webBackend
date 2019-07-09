@@ -8,7 +8,6 @@ function craftAdd(req, res, next) {
         craftName: req.body.craftName,
         description: req.body.description,
         origination: req.body.origination,
-        craftType: req.body.craftType,
         products: req.body.products,
         price: req.body.price,
         craftimage: req.file.filename
@@ -40,7 +39,7 @@ function getCraft(req, res, next) {
 
     craftModel.Craft.findAll({
 
-        attributes: ['id', 'craftName', 'description', 'origination', 'craftType', 'products', 'price','craftimage']
+        attributes: ['id', 'craftName', 'description', 'origination',  'products', 'price','craftimage']
     })
         .then(function (result) {
             res.json(result);
@@ -94,7 +93,6 @@ function updateCraft(req, res) {
         craftName: req.body.craftName,
         description: req.body.description,
         origination: req.body.origination,
-        craftType: req.body.craftType,
         products: req.body.products,
         price: req.body.price
     }, {
@@ -123,7 +121,7 @@ function updateCraft(req, res) {
 
             craftModel.Craft.findAll({
         
-                attributes: ['id', 'craftName', 'description', 'origination', 'craftType', 'products', 'price','craftimage']
+                attributes: ['id', 'craftName', 'description', 'origination', 'products', 'price','craftimage']
             })
                 .then(function (result) {
                     res.json(result);
