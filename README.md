@@ -51,6 +51,11 @@ npm version:6.9.0 </li>
    <li> swagger-jsdoc: ^3.2.9  </li>
    <li> swagger-ui-express: ^4.0.7  </li>
 <hr>
+<h3>swagger link</h3>
+http://localhost:7000/api-docs/
+
+<hr>
+
 
 <h3>Route</h3>
 <ul style="list-style-type:disc;">
